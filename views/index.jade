@@ -1,0 +1,36 @@
+extends layout
+
+block content
+  h1= title
+  
+
+  table
+    thead
+      tr
+        th name
+        th place
+        th email
+    tbody
+      each user in users
+        tr
+          td #{user.get('name').value}
+          td #{user.get('place').value}
+          td #{user.get('email').value}
+          td
+            form(action='/',method='post')
+              input(id='_method',type='hidden',name='_method',value='delete')
+              input(id='email',name='email',type='hidden',value="#{user.get('email').value}")
+              input(type='submit',value='Remove user',data-transition='fade',data-theme='c')
+
+  h2 New User
+  form(action='/',method='post')
+    tbody
+      tr
+        td: input(id='email',type='text',value='',placeholder='foo@bar.com',name='email')
+        td: input(id='first_name',type='text',value='',placeholder='name',name='name')
+        td: input(id='place',type='text',value='',placeholder='place',name='place')
+        td: input(type='submit',value='add user',data-transition='fade',data-theme='c')
+
+    
+
+
